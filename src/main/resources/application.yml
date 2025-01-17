@@ -1,0 +1,15 @@
+
+server:
+  port: 8080
+spring:
+  application:
+    name: accounts
+  datasource:
+    url: jdbc:postgresql://localhost:5432/accountsdb
+    username: postgres
+    password: 'root'
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
