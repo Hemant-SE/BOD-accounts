@@ -45,6 +45,7 @@ public class AccountsServiceImplTests {
         customerDto.setMobileNumber("9278091701");
 
         customer = new Customer();
+        customer.setCustomerId(6L);
         customer.setName("Hemant");
         customer.setEmail("hemantraghav@gmail.com");
         customer.setMobileNumber("9278091701");
@@ -55,6 +56,7 @@ public class AccountsServiceImplTests {
         accountsDto.setBranchAddress("Bank of Delhi, Connaught place new delhi");
 
         accounts = new Accounts();
+        accounts.setCustomerId(6L);
         accounts.setAccountNumber(1191861191L);
         accounts.setAccountType("Savings");
         accounts.setBranchAddress("Bank of Delhi, Connaught place new delhi");
@@ -92,12 +94,12 @@ public class AccountsServiceImplTests {
         when(accountsRepository.findByCustomerId(anyLong())).thenReturn(Optional.of(accounts));
 
         // Act
-        CustomerDto result = accountsService.fetchAccount("1234567890");
+        CustomerDto result = accountsService.fetchAccount("9278091701");
 
         // Assert
         assertNotNull(result);
-        assertEquals("John Doe", result.getName());
-        assertEquals("SAVINGS", result.getAccountsDto().getAccountType());
+        assertEquals("Hemant", result.getName());
+        assertEquals("Savings", result.getAccountsDto().getAccountType());
         verify(customerRepository, times(1)).findByMobileNumber(anyString());
         verify(accountsRepository, times(1)).findByCustomerId(anyLong());
     }
@@ -116,7 +118,7 @@ public class AccountsServiceImplTests {
     @Test
     void testUpdateAccount_ValidUpdate() {
         // Arrange
-        AccountsDto updatedAccountsDto = new AccountsDto(1191861191L, "CURRENT", "New Address");
+        AccountsDto updatedAccountsDto = new AccountsDto(1191861191L, "Current", "Pune, Maharashtra");
         customerDto.setAccountsDto(updatedAccountsDto);
         when(accountsRepository.findById(anyLong())).thenReturn(Optional.of(accounts));
         when(accountsRepository.save(any(Accounts.class))).thenReturn(accounts);
@@ -154,7 +156,7 @@ public class AccountsServiceImplTests {
         doNothing().when(customerRepository).deleteById(anyLong());  // Mock void delete method
 
         // Act
-        boolean result = accountsService.deleteAccount("1234567890");
+        boolean result = accountsService.deleteAccount("9278091701");
 
         // Assert
         assertTrue(result);  // Ensure the result is true if deletion is successful
