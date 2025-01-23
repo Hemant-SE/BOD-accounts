@@ -6,8 +6,8 @@ public final class AccountsConstants {
         // restrict instantiation
     }
 
-    public static final String  SAVINGS = "Savings";
-    public static final String  ADDRESS = "Bank of Delhi, Connaught place new delhi";
+    public static final String  SAVINGS = "Saving";
+    public static final String  ADDRESS = "Bank of Delhi, Connaught place, New Delhi";
     public static final String  STATUS_201 = "201";
     public static final String  MESSAGE_201 = "Account created successfully";
     public static final String  STATUS_200 = "200";
