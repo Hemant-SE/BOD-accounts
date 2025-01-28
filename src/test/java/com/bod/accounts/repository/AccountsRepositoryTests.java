@@ -23,6 +23,7 @@ public class AccountsRepositoryTests  {
     @BeforeEach
     void setUp(){
         account = new Accounts();
+        account.setCustomerId(1L);
         account.setAccountNumber(100L);
         account.setAccountType("Saving");
         account.setBranchAddress("Delhi");
@@ -49,8 +50,10 @@ public class AccountsRepositoryTests  {
 
     @Test
     void findByIdCustomerId_should_return_account() {
+        // Given
+        Accounts savedAccount = accountsRepository.save(account);
         // When
-        Optional<Accounts> accounts = accountsRepository.findByCustomerId(1L);
+        Optional<Accounts> accounts = accountsRepository.findByCustomerId(savedAccount.getCustomerId());
         //then
         assertTrue(accounts.isPresent());
     }
